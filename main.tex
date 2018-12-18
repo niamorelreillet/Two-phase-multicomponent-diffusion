@@ -1,14 +1,197 @@
-\documentclass{article}
+\documentclass[3p]{elsarticle}
+\usepackage{graphicx,pst-all}
+\usepackage{epstopdf}
+\usepackage{multirow}
+\usepackage{xspace}
+\usepackage{tabularx}
+\usepackage{rotating}
+\usepackage{float}
+\usepackage{amsmath,amssymb,pifont}
+\usepackage[mathscr]{eucal}
+\usepackage[english,frenchb]{babel}
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
-\title{Two-phase multicomponent diffusion}
-\author{niamor51290 }
-\date{December 2018}
+\newcommand{\n}{\tabularnewline}
+\newcolumntype{C}{>{\centering}X}
+\newcolumntype{L}{>{\raggedleft}X} 
+\newcolumntype{R}{>{\raggedright}X} 
+\newcolumntype{M}[1]{>{\centering}m{#1}}
+
+\newenvironment{legend}%
+ {\tabular{r>{\small} l}}%
+ {\endtabular}
+
+\newcommand{\Rm}[1]{{\bf R}_{#1}^{g+}}
+\newcommand{\Rr}[1]{{\bf r}_{#1}^{g\ast}}
+\newcommand{\Sm}[1]{{S_{#1}^{g+}}}
+\newcommand{\Sr}[1]{{s_{#1}^{g\ast}}}
+\newcommand{\Nr}[1]{N_{#1}^{\ast}}
+\newcommand{\M}{\mathbb}
+\newcommand{\B}[1]{{\bf #1}\xspace}
+\newcommand{\T}{\texttt}
+\newcommand{\Mc}{\mathcal}
+\newcommand{\Hi}{\textit}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\snorm}[1]{\|#1\|}
+\newcommand{\psca}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\pscac}[2]{\textcolor{red}{\left\langle \textcolor{black}{#1} , \textcolor{black}{#2} \right\rangle}}
+\newcommand{\la}{\Big\langle}
+\newcommand{\ra}{\Big\rangle}
+\newcommand{\im}{{\bf i}\xspace}
+\newcommand{\sg}{\textrm{sg}}
+
+\newcommand{\Eq}[1]{Eq.~\ref{eq:#1}}
+\newcommand{\Eqs}[2]{Eqs.~\ref{eq:#1} and~\ref{eq:#2}}
+\newcommand{\Eqss}[3]{Eqs.~\ref{eq:#1},~\ref{eq:#2} and~\ref{eq:#3}}
+\newcommand{\Fig}[1]{Figure~\ref{fig:#1}}
+\newcommand{\Figs}[2]{Figures~\ref{fig:#1} and~\ref{fig:#2}}
+\newcommand{\Figss}[3]{Figures~\ref{fig:#1},~\ref{fig:#2} and~\ref{fig:#3}}
+\newcommand{\Tab}[1]{Table~\ref{tab:#1}}
+\newcommand{\Tabs}[2]{Tables~\ref{tab:#1} and~\ref{tab:#2}}
+\newcommand{\Tabss}[3]{Tables~\ref{tab:#1},~\ref{tab:#2} and~\ref{tab:#3}}
+\newcommand{\Sect}[1]{Section~\ref{sect:#1}}
+\newcommand{\Sects}[2]{Sections~\ref{sect:#1}~and~\ref{sect:#2}}
+\newcommand{\Sec}[1]{\Sect{#1}}
+\newcommand{\App}[1]{Appendix~\ref{app:#1}}
+%\renewcommand{\emph}[1]{\textcolor{red}{\bf #1}}
+
+% notations
+\newcommand{\functional}[2][\cdot]{\mathbb{#2}\left[#1\right]}
+\newcommand{\function}[2][\cdot]{#2\left(#1\right)}
+\newcommand{\grad}[1]{\nabla #1}
+\newcommand{\dX}[1]{\frac{\partial #1}{\partial x}}
+\renewcommand{\div}[1]{\nabla \cdot #1}
+\newcommand{\Lapl}[1]{\Delta #1}
+\newcommand{\LaplX}[1]{\frac{\partial^2 #1}{\partial x^2}}
+\newcommand{\domain}[1]{V_{#1}}
+\newcommand{\boundary}[1]{\partial \domain{#1}}
+\newcommand{\interface}[1]{\Gamma_{#1}}
+\newcommand{\MatrixIJ}[3]{\left[#1\right]_{#2,#3}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\newenvironment{abstracts}
+ {\global\setbox\absbox=\vbox\bgroup
+    \hsize=\textwidth
+    \linespread{1}\selectfont}
+ {\vspace{-\bigskipamount}\egroup}
+\renewenvironment{abstract}[1][]
+ {\if\relax\detokenize{#1}\relax\else\selectlanguage{#1}\fi
+  \noindent\textbf{\abstractname}\par\medskip\noindent\ignorespaces}
+ {\par\bigskip}
+
+\raggedbottom
+
+\makeatletter
+\def\ps@pprintTitle{
+      \let\@oddhead\@empty
+      \let\@evenhead\@empty
+      \def\@oddfoot{\reset@font\hfil\thepage\hfil}
+      \let\@evenfoot\@oddfoot
+}
+\makeatother
+\bibliographystyle{elsarticle-num}
 
 \begin{document}
 
-\maketitle
+\begin{frontmatter}
 
-\section{Introduction}
+\title{Working document on two-phase multicomponent modelling}
+% 
+% \author[Cadarache]{R.~Le Tellier\corref{contact}}
+% \ead{romain.le-tellier@cea.fr}
+% \cortext[contact]{contact:}
+% 
+% \address[Cadarache]{CEA, DEN, DTN/SMTA/LMAG, Cadarache \\
+%   F-13108 Saint Paul-lez-Durance, France}
+  
+% \begin{abstracts}
+% \selectlanguage{frenchb}
+% \begin{abstract}[french]
+% %   Resum\'e en fran\c{c}ais
+% 
+%  \end{abstract}
+% \selectlanguage{english}
+% \begin{abstract}
+% %   Abstract in English 
+% \end{abstract}
+% \end{abstracts}
+  
+\end{frontmatter}
+
+\selectlanguage{frenchb}
+\section{Basic equations}
+
+\subsection{Multicomponent diffusion equation}
+
+\subsubsection{Written in terms of components (elements)}
+
+In a $n-$component system, the mass conservation law is expressed as:
+\begin{equation}
+ \frac{\partial c_i}{\partial t} = -\div{J_i} \label{eq:ci}
+\end{equation}
+where $c_i$ is the concentration of component $i$ and $J_i$ is the molar flux of component $i$.
+
+In the generalized linear diffusion theory for $n-$component systems (see \cite{Andersson1992}), for a given phase, $J_i$ is expressed as a linear combination of the concentration gradients:
+\begin{equation}
+J_i = - \sum_{j=1}^n D_{ij} \grad(c_j) \label{eq:Ji}
+\end{equation}
+where $\MatrixIJ{D_{ij}}{i}{j}$ is the diffusion coefficient matrix.
+
+$\MatrixIJ{D_{ij}}{i}{j}$ is evaluated under the form:
+\begin{equation}
+ D_{ij} =  \sum_{k=1}^n \left(\delta_{ki} -\frac{V_k}{V_m} x_i\right) x_k \frac{D_k^\star}{RT} \frac{\partial \mu_k}{\partial x_j} 
+\end{equation}
+where 
+\begin{itemize}
+ \item $\delta_{ki}$ is the Kronecker delta;
+ \item $x_i$ is the mole fraction of component $i$;
+ \item $V_m = \sum_{i} x_i V_i$ is the molar volume;
+ \item $D_k^\star$ is the self-diffusion coefficient of component $k$;
+ \item $\frac{\partial \mu_k}{\partial x_j}$ are the derivatives of the chemical potentials.
+\end{itemize}
+Note that, in the general case, $\frac{\partial \mu_k}{\partial x_j}$ quantities makes only sense under a \emph{local} equilibrium hypothesis (in the corium system case, corresponding to the equilibrium of the redox reactions for a given component inventory). Such terms cannot be evaluated directly and have to be calculated from separated equilibrium calculations through a finite difference formula.
+
+\subsubsection{Written in terms of endmembers (species)}
+
+Associated with the $n-$component system, the CALPHAD based representation of the system involves a a set of $m$ endmembers that, in the case of the \T{LIQUID} and \T{C1\_FCC} phases of the NUCLEA database, are stoichiometric species and the constituents of the non-ideal associate model that is used for representing these phases. 
+
+Equations similar to \Eqs{ci}{Ji} can also be written in terms of endmembers and, in this case, the associated diffusion coefficient matrix is
+\begin{equation}
+ \tilde{D}_{ij} =  \sum_{k=1}^m \left(\delta_{ki} -\frac{V_k}{V_m} x_i\right) x_k \frac{\tilde{D}_k^\star}{RT} \frac{\partial \mu_k}{\partial x_j} 
+\end{equation}
+where 
+\begin{itemize}
+ \item $\delta_{ki}$ is the Kronecker delta;
+ \item $x_i$ is the mole fraction of endmember $i$;
+ \item $V_m = \sum_{i} x_i V_i$ is the molar volume;
+ \item $\tilde{D}_k^\star$ is the self-diffusion coefficient of endmember $k$;
+ \item $\frac{\partial G_k}{\partial x_j}$ are the derivatives of the partial Gibbs energy w.r.t. endmembers.
+\end{itemize}
+In principle, $\frac{\partial G_k}{\partial x_j}$ quantities can be directly evaluated from the database.
+
+\subsection{Interface condition}
+
+\subsubsection{Dissolution}
+
+We consider an isothermal two-phase system with a solid phase (superscript $s$) being dissoluted by the liquid one (superscript $l$).
+
+The jump interface condition for component $i$ concentration are written as:
+\begin{equation}
+v^{l/s} \left(c_i^l-c_i^s\right) = J_i^l - J_i^s
+\end{equation}
+Assuming local equilibrium at the interface, $x_i^l$ and $x_i^s$ are the concentrations associated with a liquid-solid tie line. 
+Under fixed pressure and temperature, these equations defines a system of $n-2$ non-linear equations whose unknowns are $v^{l/s}$ and $n-2$ chemical potentials.
+
+\subsubsection{Oxidation}
+
+We consider an isothermal two-phase system with a liquid phase (superscript $l$) being oxidized by the gas one (superscript $g$).
+
+\emph{to be completed}
+
+\section*{References}
+
+\bibliography{../../../../write/References/lma-jabref.bib}
 
 \end{document}
